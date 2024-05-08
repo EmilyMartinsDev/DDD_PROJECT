@@ -5,7 +5,7 @@ import AddressChangeHanfle from "../../customer/events/handler/AddressChangeHand
 import CustomerCreateHandle from "../../customer/events/handler/CustomerChangeHandle";
 import EventDispatcher from "./event-dispatcher";
 import CustomerCreateHandlerVersion2 from "../../customer/events/handler/CustomerCreatedVersion2Handler";
-import CustomerCreateEventVersion2 from "../../customer/events/CustomerCreateEventVersion2";
+
 import AddressChangeHandle from "../../customer/events/handler/AddressChangeHandle";
 import AddressChangeCustomerEvent from "../../customer/events/AddressChangeEvent";
 
@@ -146,7 +146,7 @@ describe("Domain events tests", ()=>{
         eventDispatcher.register("ProductCreatedEvent", eventHandler);
         eventDispatcher.register("CustomerCreateEvent", createUserHandle);
         eventDispatcher.register("AddressChangeCustomerEvent", changeAddressCustomer);
-        eventDispatcher.register("CustomerCreateEventVersion2", createUserHandleVersion2);
+        eventDispatcher.register("CustomerCreateEvent", createUserHandleVersion2);
 
         expect(
             eventDispatcher.getEventHandlers["ProductCreatedEvent"][0]
@@ -161,7 +161,7 @@ describe("Domain events tests", ()=>{
             ).toMatchObject(changeAddressCustomer);
             
             expect(
-              eventDispatcher.getEventHandlers["CustomerCreateEventVersion2"][0]
+              eventDispatcher.getEventHandlers["CustomerCreateEvent"][1]
             ).toMatchObject(createUserHandleVersion2);
   
         const productCreatedEvent = new ProductCreatedEvent({
@@ -173,7 +173,7 @@ describe("Domain events tests", ()=>{
         const customerCreatedEvent = new CustomerCreateEvent({
            
           });
-          const customerCreatedEvent2 = new CustomerCreateEventVersion2({
+          const customerCreatedEvent2 = new CustomerCreateEvent({
            
           });
           const addressChangeEvent = new AddressChangeCustomerEvent({
