@@ -32,6 +32,7 @@ export default class Customer {
       if (this._name.length === 0) {
         throw new Error("Name is required");
       }
+    
     }
   
     changeName(name: string) {
