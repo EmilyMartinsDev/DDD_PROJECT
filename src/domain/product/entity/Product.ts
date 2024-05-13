@@ -38,6 +38,23 @@ export default class Product extends Entity implements ProductInterface {
   }
 
   validate() {
-    ProductValidatorFactory.create().validate(this)
+    if(this.name.length == 0) {
+      this.notification.addError({
+        context: "customer",
+        "message": "Name is required",
+      })
+    }
+    if(!this._id) {
+      this.notification.addError({
+        context: "customer",
+        "message": "Id is required",
+      })
+    }
+    if(this.price <= 0) {
+      this.notification.addError({
+        context: "customer",
+        "message": "Price must be greater than zero",
+      })
+    }
   }
 }
